@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Alerta phishing — Activitat educativa</title>
+<style>
+  :root{
+    --bg:#071018; --panel:#0b151a; --accent:#00d1ff; --accent2:#4fd8ff; --muted:#98a8b3; --danger:#ff6b6b;
+    font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#041018);color:var(--muted)}
+  .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+  .card{width:100%;max-width:980px;background:linear-gradient(180deg,var(--panel), #071018);border-radius:12px;padding:28px;border:1px solid rgba(255,255,255,.03);box-shadow:0 12px 40px rgba(0,0,0,.6)}
+  .header{display:flex;align-items:center;gap:16px}
+  .logo{width:64px;height:64px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#021017}
+  h1{margin:0;color:#e9f6fb;font-size:22px}
+  p.lead{margin:6px 0 0;color:var(--muted)}
+  .row{display:flex;gap:20px;margin-top:18px;flex-wrap:wrap}
+  .col{flex:1;min-width:260px}
+  .box{background:rgba(255,255,255,0.02);padding:18px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+  .btn{display:inline-block;padding:10px 16px;border-radius:8px;background:var(--accent);color:#021017;text-decoration:none;font-weight:700;border:0;cursor:pointer}
+  .tip{margin-top:12px;font-size:14px;color:#cfeffb;background:linear-gradient(180deg, rgba(0,209,255,0.03), rgba(0,209,255,0.01));padding:10px;border-radius:8px}
+  footer{margin-top:18px;color:#7f8a92;font-size:12px;text-align:right}
+  ul{padding-left:18px;color:var(--muted)}
+  a.small{color:var(--muted);font-size:13px;text-decoration:underline}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" role="main" aria-labelledby="title">
+      <div class="header">
+        <div class="logo">TR</div>
+        <div>
+          <h1 id="title">Atenció: possible enllaç sospitós — Activitat educativa</h1>
+          <p class="lead">Aquesta pàgina forma part del Treball de Recerca "Ciberseguretat i hacking: reptes en un món connectat" (David i Arnau, 2n Batx.). No es recullen dades personals.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="box">
+            <p style="color:var(--danger);font-weight:700;margin:0 0 10px">Exercici de conscienciació</p>
+            <p>Has arribat a una pàgina creada amb finalitats educatives per aprendre a identificar possibles correus i enllaços de phishing. No introduïu dades, contrasenyes ni cap informació personal.</p>
+
+            <div style="margin-top:12px">
+              <button id="learnBtn" class="btn">Vull saber com detectar-ho</button>
+            </div>
+
+            <div id="details" class="tip" style="display:none">
+              <strong>Consells ràpids:</strong>
+              <ul>
+                <li>Comprova el remitent i el domini (el domini ha d’estar escrit correctament).</li>
+                <li>Desconfia de trucs d'urgència o demandes de contrasenyes.</li>
+                <li>Si tens dubtes, parla amb el professorat o amb l'equip TIC.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="box" aria-hidden="true">
+            <div style="font-size:14px;color:#9fb0bb">Objectiu de l'activitat</div>
+            <div style="margin-top:8px;color:#e9f6fb;font-weight:700">Conscienciació sobre phishing i bones pràctiques</div>
+            <p style="margin-top:10px;color:var(--muted)">Aquesta activitat recull només un nombre total d'accessos (comptador anònim). No es demana cap dada identificable ni s'intenta enganyar amb finalitats malicioses.</p>
+          </div>
+        </div>
+      </div>
+
+      <footer>Treball de Recerca — Ciberseguretat i hacking</footer>
+    </div>
+  </div>
+
+<script>
+  // SUBSTITUEIX aquesta URL per la que et doni el Web App (Apps Script)
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxKVperSA_ruZA12tOnTpWG6DDrihs_X2dCVVtY9-F_sF82J1H4s72_vpRueyXvb_C8/exec";
+
+  // Incrementa automàticament l'accés (POST) quan la pàgina es carrega
+  async function incrementVisit() {
+    try {
+      await fetch(WEB_APP_URL + "?action=inc", { method: "POST", mode: "no-cors" });
+      // mode:no-cors evita errors visibles si es crida des d'origen diferent; la resposta no serà llegible.
+    } catch (e) {
+      console.warn("No s'ha pogut registrar la visita (mode de prova).", e);
+    }
+  }
+
+  document.getElementById('learnBtn').addEventListener('click', () => {
+    const d = document.getElementById('details');
+    d.style.display = (d.style.display === 'none') ? 'block' : 'none';
+    // Opcional: podríeu cridar incrementVisit() aquí també, però ja volem 1 per visita.
+  });
+
+  // cridem increment al carregar la pàgina
+  window.addEventListener('load', incrementVisit);
+</script>
+</body>
+</html>
